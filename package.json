@@ -8,7 +8,7 @@
     "start": "node app.js",
     "dev": "npm run build:dev && node app.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages"
+    "deploy": "gh-pages -d ."
   },
   "author": "",
   "license": "ISC",

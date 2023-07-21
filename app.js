@@ -3,11 +3,11 @@ const path = require('path');
 
 const app = express();
 
-app.get('/index.js', (req, res)  => {
+app.get('/*/index.js', (req, res)  => {
   res.sendFile(path.resolve('js') + '/index.js')
 })
 
-app.get('/index.css', (req, res)  => {
+app.get('/*/index.css', (req, res)  => {
   res.sendFile(path.resolve('css') + '/index.css')
 })
 

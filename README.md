@@ -1,6 +1,7 @@
 # Code Playground
 
-Code Playground - Integrated Code Editors for testing and show-casing HTML, CSS and JavaScript code snippets.
+- Code Playground - Integrated Code Editors for testing and show-casing HTML, CSS and JavaScript code snippets.
+- Demo [Link](https://chandankl5.github.io/Code-Playground/)
     
 **Tech Stack** - `HTML, SCSS, JavaScript`
 

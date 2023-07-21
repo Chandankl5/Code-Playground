@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "node-sass index.scss css/index.css",
+    "build": "node-sass index.scss index.css",
+    "build:dev": "node-sass index.scss css/index.css",
     "start": "node app.js",
-    "dev": "npm run build && node app.js"
+    "dev": "npm run build:dev && node app.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages"
   },
   "author": "",
   "license": "ISC",

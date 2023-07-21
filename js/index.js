@@ -12,6 +12,14 @@ const layoutLeftToggle = document.getElementById('layout-left');
 const layoutDefaultToggle = document.getElementById('layout-default');
 const layoutRightToggle = document.getElementById('layout-right');
 
+
+// Mobile View Elements
+const mobileEditorPanel = document.getElementById('mobile-editor-panel');
+const htmlToggle = document.getElementById('html-toggle');
+const cssToggle = document.getElementById('css-toggle');
+const jsToggle = document.getElementById('js-toggle');
+
+
 var state = {
   html: localStorage.getItem('html') ?? '',
   styles: localStorage.getItem('css') ?? '',
@@ -19,6 +27,10 @@ var state = {
 }
 
 const main = function main() {
+  layoutDefaultToggle.classList.add('active');
+  htmlToggle.classList.add('active'); // Mobile HTML Tab active by default
+
+
 
   var debounceUpdate = debounce(update());
 
@@ -111,6 +123,16 @@ const jsCm = new CodeMirror.fromTextArea(jsEditor, {
 
 jsCm.setValue(localStorage.getItem('script') ?? '')
 
+
+// Mobile View Editor
+let mobileCm = new CodeMirror.fromTextArea(mobileEditorPanel, {
+  ...editorDefaultConfig,
+  mode: "xml"
+})
+
+mobileCm.setValue(localStorage.getItem('html') ?? '')
+mobileCm.on('change', main.onEditorInput('html'))
+
 htmlCm.on('change', main.onEditorInput('html'))
 
 cssCm.on('change', main.onEditorInput('css'))
@@ -128,6 +150,10 @@ layoutToggle.addEventListener('click', (e) => {
 })
 
 layoutLeftToggle.addEventListener('click', () => {
+  layoutLeftToggle.classList.add('active');
+  layoutDefaultToggle.classList.remove('active')
+  layoutRightToggle.classList.remove('active')
+
   editorsResultWrapper.style.flexDirection = 'row';
 
   editors.classList.remove('editors--default', 'editors--right')
@@ -139,6 +165,10 @@ layoutLeftToggle.addEventListener('click', () => {
 })
 
 layoutDefaultToggle.addEventListener('click', () => {
+  layoutDefaultToggle.classList.add('active')
+  layoutLeftToggle.classList.remove('active')
+  layoutRightToggle.classList.remove('active')
+
   editorsResultWrapper.style.flexDirection = 'column';
 
   editors.classList.remove('editors--left', 'editors--right')
@@ -150,6 +180,10 @@ layoutDefaultToggle.addEventListener('click', () => {
 })
 
 layoutRightToggle.addEventListener('click', () => {
+  layoutRightToggle.classList.add('active')
+  layoutDefaultToggle.classList.remove('active')
+  layoutLeftToggle.classList.remove('active')
+
   editorsResultWrapper.style.flexDirection = 'row';
 
   editors.classList.remove('editors--default', 'editors--left')
@@ -159,6 +193,64 @@ layoutRightToggle.addEventListener('click', () => {
     item.style.width = '100%';
   }
 })
+
+
+// Mobile View Event handlers
+htmlToggle.addEventListener('click', function() {
+  htmlToggle.classList.add('active');
+  cssToggle.classList.remove('active');
+  jsToggle.classList.remove('active');
+
+  removeCodeMirror(); // remove code editor added by default on page load
+
+  mobileCm = new CodeMirror.fromTextArea(mobileEditorPanel, {
+    ...editorDefaultConfig,
+    mode: "xml"
+  })
+
+  mobileCm.setValue(localStorage.getItem('html') ?? '')
+
+  mobileCm.on('change', main.onEditorInput('html'))
+})
+
+cssToggle.addEventListener('click', function() {
+  cssToggle.classList.add('active');
+  htmlToggle.classList.remove('active');
+  jsToggle.classList.remove('active');
+
+  removeCodeMirror(); // remove code editor added by default on page load
+
+  mobileCm = new CodeMirror.fromTextArea(mobileEditorPanel, {
+    ...editorDefaultConfig,
+    mode: "css"
+  })
+
+  mobileCm.setValue(localStorage.getItem('css') ?? '')
+  mobileCm.on('change', main.onEditorInput('css'))
+})
+
+jsToggle.addEventListener('click', function() {
+  jsToggle.classList.add('active');
+  htmlToggle.classList.remove('active');
+  cssToggle.classList.remove('active');
+
+  removeCodeMirror(); // remove code editor added by default on page load
+
+  mobileCm = new CodeMirror.fromTextArea(mobileEditorPanel, {
+    ...editorDefaultConfig,
+    mode: "javascript"
+  })
+
+  mobileCm.setValue(localStorage.getItem('script') ?? '')
+  mobileCm.on('change', main.onEditorInput('js'))
+})
+
+function removeCodeMirror() {
+  if(mobileCm) {
+    mobileCm.toTextArea();
+    mobileCm = null;
+  }
+}
 
 function debounce(cb, delay = 300) {
   let timer = null;

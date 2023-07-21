@@ -63,6 +63,30 @@
   height: 100%;
 }
 
+#mobile-editor-nav {
+  display: flex;
+}
+
+#mobile-editor-wrapper {
+  flex-grow: 1;
+}
+
+.editor-toggle {
+  background-color: hsl(227.37deg, 12.26%, 30.39%);
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  flex-grow: 1;
+
+  &:not(:nth-last-child(1)) {
+    border-right: 1px solid;
+  }
+
+  &.active {
+    background-color: hsl(222.86deg ,13.73%, 20%)
+  }
+}
+
 nav {
   padding: 1rem 2rem;
   background-color: black;
@@ -135,7 +159,7 @@ h1, h2, h3 {
 }
 
 @media screen and (max-width: 1200px) {
-  #html-editor-panel, #css-editor-panel, #js-editor-panel {
+  #html-editor-panel, #css-editor-panel, #js-editor-panel, #layout-toggle {
     display: none;
   }
 }

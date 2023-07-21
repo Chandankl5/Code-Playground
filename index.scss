@@ -1,0 +1,141 @@
+#root {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+}
+
+#editors-result-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.editors {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 0.75rem;
+  background-color: black;
+  border: 1px solid #2f2f2f;
+  border-radius: 2px;
+
+  &--left, &--right {
+    flex-direction: column;
+    width: 20%;
+  }
+
+  &--right {
+    order: 2;
+  }
+
+  &--left {
+  }
+
+  &--default {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+.editor-panel {
+  width: 33.33%;
+
+  & .header {
+    .title {
+      color: white;
+      display: inline-block;
+    }
+
+    .file-type-icon {
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+    }
+  }
+}
+
+#result-window {
+  flex-grow: 1;
+}
+
+#result-window-iframe {
+  width: 100%;
+  height: 100%;
+}
+
+nav {
+  padding: 1rem 2rem;
+  background-color: black;
+  position: relative;
+
+  & .nav-list {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .title {
+    color: white;
+  }
+
+  & .toggle {
+    cursor: pointer;
+    padding: 0.75rem;
+    background-color: hsl(227.37deg, 12.26%, 30.39%);
+    border: none;
+
+    & svg {
+      fill: white;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  & .dropdown-list {
+    position: absolute;
+    top: 100%;
+    right: 2rem;
+    width: 300px;
+    padding: 1rem;
+    background-color: hsl(232.5deg, 11.76%, 13.33%);
+    color: white;
+    z-index: 100;
+    display: none;
+
+    & .content {
+      margin-top: 1rem;
+      display: flex;
+    }
+
+    & .toggle {
+      flex-grow: 1;
+      background-color: transparent;
+    }
+
+    & .active {
+      background-color: hsl(227.37deg, 12.26%, 30.39%);
+    }
+  }
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: .75rem;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 1200px){
+  #mobile-editor-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #html-editor-panel, #css-editor-panel, #js-editor-panel {
+    display: none;
+  }
+}

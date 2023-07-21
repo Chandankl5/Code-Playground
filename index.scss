@@ -94,7 +94,7 @@ nav {
 
   & .nav-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 
   & .title {
@@ -159,7 +159,7 @@ h1, h2, h3 {
 }
 
 @media screen and (max-width: 1200px) {
-  #html-editor-panel, #css-editor-panel, #js-editor-panel, #layout-toggle {
-    display: none;
+  #html-editor-panel, #css-editor-panel, #js-editor-panel, #layout-toggle, .dropdown-list {
+    display: none !important;
   }
 }
